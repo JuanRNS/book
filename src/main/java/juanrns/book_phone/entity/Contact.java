@@ -16,8 +16,8 @@ import java.time.LocalDateTime;
 public class Contact {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
 
     @NotNull
     private String name;
@@ -29,7 +29,24 @@ public class Contact {
     private LocalDateTime created;
     private LocalDateTime modified;
 
+    public Contact(String name,String phone, String email,String address,Boolean favorite) {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+    }
+
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+    @PrePersist
+    protected void onCreate() {
+        created = LocalDateTime.now();
+        modified = created;
+    }
+    @PreUpdate
+    protected void onUpdate() {
+        modified = LocalDateTime.now();
+    }
 }

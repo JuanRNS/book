@@ -8,7 +8,7 @@ public enum UserType {
     ADMIN("admin"),
     USER("user");
 
-    private String userType;
+    private final String userType;
 
     UserType(String userType) {
         this.userType = userType;

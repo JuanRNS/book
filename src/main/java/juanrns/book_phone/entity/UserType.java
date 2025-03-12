@@ -1,6 +1,7 @@
 package juanrns.book_phone.entity;
 
 
+import jakarta.persistence.PrePersist;
 import lombok.Getter;
 
 @Getter

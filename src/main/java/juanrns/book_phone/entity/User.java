@@ -24,27 +24,34 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @NotNull
-    private String username;
-    @NotNull
+
+    private String name;
+
     @Column(unique = true)
     private String email;
-    @NotNull
+
     private String password;
-    private String phone;
-    private UserType userType;
+    private String phoneNumber;
+    private UserType userType = UserType.ADMIN;
     private LocalDateTime created;
     private LocalDateTime modified;
 
     @OneToMany(mappedBy = "user")
     private List<Contact> contacts;
 
+    public User(String name, String email, String password, String phoneNumber) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+    }
 
     @PrePersist
     protected void onCreate() {
         created = LocalDateTime.now();
         modified = created;
     }
+
     @PreUpdate
     protected void onUpdate() {
         modified = LocalDateTime.now();

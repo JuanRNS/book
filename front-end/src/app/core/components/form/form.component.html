@@ -1,0 +1,10 @@
+<div class="form-container">
+    <div class="form-header">
+        <span> {{ signinOrSignup() }} </span>
+        <h3> {{formTitle()}}</h3>
+    </div>
+    <form>
+        <ng-content></ng-content>
+        <button mat-button>{{ buttonForm() }}</button>
+    </form>
+</div>

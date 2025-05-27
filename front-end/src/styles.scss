@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    background-color: #111;
+    background-image: url('../public/Vector3.png'), url('../public/Vector2.png'),url('../public/Vector1.png');
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-position: top left, center center, bottom right;
+    background-size: 600px, 800px, 600px;
+    background-blend-mode: multiply;
+    filter: brightness(100%);
+ }

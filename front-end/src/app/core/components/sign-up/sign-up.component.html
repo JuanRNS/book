@@ -1,1 +1,29 @@
-<p>signup works!</p>
+<div [formGroup]="form">
+    <app-form
+    formTitle="Criar conta"
+    buttonForm="Criar conta"
+    signinOrSignup="Já tem uma conta? Acessar conta"
+    (signinOrSignupButton)="signUpClick()"
+    (formSubmit)="onSubmitSignUp()"
+    >
+        <mat-form-field class="block-input">
+            <mat-label>Nome </mat-label>
+            <input matInput type="text" formControlName="name">
+        </mat-form-field>
+    
+        <mat-form-field class="block-input">
+            <mat-label>Email </mat-label>
+            <input matInput type="email" formControlName="email">
+        </mat-form-field>
+    
+        <mat-form-field class="block-input">
+            <mat-label>Senha </mat-label>
+            <input matInput type="password" formControlName="password">
+        </mat-form-field>
+    
+        <mat-form-field class="block-input">
+            <mat-label>Confirmar senha </mat-label>
+            <input matInput type="password" formControlName="confirmPassword">
+        </mat-form-field>
+    </app-form>
+</div>

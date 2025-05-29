@@ -1,12 +1,12 @@
 <div class="form-container">
   <div class="form-content">
     <div class="form-header">
-      <span>Já tem uma conta?</span>
-      <h3>Criar conta</h3>
+      <button mat-button class="signin-or-signup" (click)="onSigninOrSignupClick()">{{signinOrSignup()}}</button>
+      <h3>{{formTitle()}}</h3>
     </div>
     <form>
         <ng-content></ng-content>
-        <button mat-flat-button color="primary">Criar conta</button>
+        <button mat-flat-button color="primary" (click)="onSubmit()">{{buttonForm()}}</button>
     </form>
   </div>
 </div>

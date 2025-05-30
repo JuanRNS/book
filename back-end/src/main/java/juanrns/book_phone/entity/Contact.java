@@ -2,9 +2,7 @@ package juanrns.book_phone.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
@@ -14,6 +12,15 @@ import java.time.LocalDateTime;
 public class Contact {
 
     public Contact() {}
+
+    public Contact(String name,String phone, String email,String address,Boolean favorite, User user_id) {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.favorite = favorite;
+        this.user = user_id;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,13 +35,6 @@ public class Contact {
     private Boolean favorite;
     private LocalDateTime created;
     private LocalDateTime modified;
-
-    public Contact(String name,String phone, String email,String address,Boolean favorite) {
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-    }
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")

@@ -30,10 +30,10 @@ public class SecurityConfigs {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize-> authorize
-                        .requestMatchers(HttpMethod.POST,"/contact").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/contact").hasRole("USER")
                         .requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST,"/auth/register").permitAll()
-                        .requestMatchers(HttpMethod.GET,"auth").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/auth/search").hasRole("USER")
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

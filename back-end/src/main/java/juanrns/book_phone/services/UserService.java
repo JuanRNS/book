@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -17,22 +18,19 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public void CreateUser(UserDTO user) {
+    public User CreateUser(UserDTO user) {
         String password = new BCryptPasswordEncoder().encode(user.password());
         User newUser = new User(user.name(),user.email(),password,user.phoneNumber());
         userRepository.save(newUser);
+        return newUser;
+    }
+    public boolean emailExists(String email) {
+        return userRepository.findByEmail(email).isPresent();
     }
 
-
-    public boolean getByEmail(String email) {
-        if(userRepository.findByEmail(email) != null) {
-            return false;
-        }
-        else{
-            return true;
-        }
+    public Optional<User> findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
-
 
     public List<User> getAllUsers() {
         return userRepository.findAll();

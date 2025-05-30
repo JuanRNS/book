@@ -41,15 +41,16 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserDTO> register(@RequestBody @Valid UserDTO authenticationDTO) {
-   //     if(userService.getByEmail(authenticationDTO.email())) return ResponseEntity.badRequest().build();
+    public ResponseEntity<?> register(@RequestBody @Valid UserDTO authenticationDTO) {
+        if(userService.emailExists(authenticationDTO.email())) {
+            return ResponseEntity.badRequest().body("Já existe uma conta com esse email");
+        }
+        User newUser = userService.CreateUser(authenticationDTO);
 
-        userService.CreateUser(authenticationDTO);
-
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok("Usuário cadastrado com sucesso  " +newUser);
     }
 
-    @GetMapping
+    @GetMapping("/search")
     public ResponseEntity<List<User>> getCurrentUser() {
         return ResponseEntity.ok(userService.getAllUsers());
     }

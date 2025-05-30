@@ -19,22 +19,19 @@ public class ContactService {
         this.contactsRepository = contactsRepository;
     }
 
-    public ContactResponseDTO CreateContact(ContactDTO contact, User user) {
-        Contact contact1 = new Contact(contact.name(),contact.phone(),contact.email(),
-                contact.address(),contact.favorite(), user);
-        Contact newContact = contactsRepository.save(contact1);
-
-        return new ContactResponseDTO(
-                newContact.getId(),
-                newContact.getName(),
-                newContact.getPhone(),
-                newContact.getEmail(),
-                newContact.getAddress(),
-                newContact.getFavorite(),
-                newContact.getCreated(),
-                newContact.getModified()
+    public Contact createContact(ContactDTO contact, User user) {
+        Contact newContact = new Contact(
+                contact.name(),
+                contact.phone(),
+                contact.email(),
+                contact.address(),
+                contact.favorite(),
+                user
         );
+
+        return contactsRepository.save(newContact);
     }
+
 
     public List<ContactResponseDTO> getAllContacts(Long userId) {
         return contactsRepository.findContactsByUserId(userId).stream().map(

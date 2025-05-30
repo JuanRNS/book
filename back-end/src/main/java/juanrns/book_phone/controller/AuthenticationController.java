@@ -3,6 +3,7 @@ package juanrns.book_phone.controller;
 import jakarta.validation.Valid;
 import juanrns.book_phone.DTO.UserDTO;
 import juanrns.book_phone.DTO.UserLogin;
+import juanrns.book_phone.DTO.UserResponseDTO;
 import juanrns.book_phone.entity.User;
 import juanrns.book_phone.infra.security.TokenService;
 import juanrns.book_phone.services.UserService;
@@ -43,11 +44,17 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody @Valid UserDTO authenticationDTO) {
         if(userService.emailExists(authenticationDTO.email())) {
-            return ResponseEntity.badRequest().body("Já existe uma conta com esse email");
+            return ResponseEntity.badRequest().body(null);
         }
         User newUser = userService.CreateUser(authenticationDTO);
 
-        return ResponseEntity.ok("Usuário cadastrado com sucesso  " +newUser);
+        UserResponseDTO response = new UserResponseDTO(
+                newUser.getId(),
+                newUser.getName(),
+                newUser.getEmail(),
+                newUser.getPhoneNumber()
+        );
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/search")

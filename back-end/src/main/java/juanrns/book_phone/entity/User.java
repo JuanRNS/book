@@ -30,7 +30,8 @@ public class User implements UserDetails {
 
     private String password;
     private String phoneNumber;
-    private UserType userType = UserType.ADMIN;
+    @Enumerated(EnumType.STRING)
+    private UserType userType = UserType.USER;
     private LocalDateTime created;
     private LocalDateTime modified;
 
@@ -43,8 +44,6 @@ public class User implements UserDetails {
         this.password = password;
         this.phoneNumber = phoneNumber;
     }
-
-
 
     @PrePersist
     protected void onCreate() {

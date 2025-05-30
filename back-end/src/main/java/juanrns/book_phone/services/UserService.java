@@ -1,6 +1,7 @@
 package juanrns.book_phone.services;
 
 import juanrns.book_phone.DTO.UserDTO;
+import juanrns.book_phone.DTO.UserResponseDTO;
 import juanrns.book_phone.entity.User;
 import juanrns.book_phone.repositories.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,8 +22,8 @@ public class UserService {
     public User CreateUser(UserDTO user) {
         String password = new BCryptPasswordEncoder().encode(user.password());
         User newUser = new User(user.name(),user.email(),password,user.phoneNumber());
-        userRepository.save(newUser);
-        return newUser;
+
+        return userRepository.save(newUser);
     }
     public boolean emailExists(String email) {
         return userRepository.findByEmail(email).isPresent();

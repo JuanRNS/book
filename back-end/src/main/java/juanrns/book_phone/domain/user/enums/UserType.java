@@ -1,4 +1,4 @@
-package juanrns.book_phone.entity;
+package juanrns.book_phone.domain.user.enums;
 
 
 import lombok.Getter;

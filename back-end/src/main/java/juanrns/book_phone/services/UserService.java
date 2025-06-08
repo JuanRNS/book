@@ -1,9 +1,8 @@
 package juanrns.book_phone.services;
 
-import juanrns.book_phone.DTO.UserDTO;
-import juanrns.book_phone.DTO.UserResponseDTO;
-import juanrns.book_phone.entity.User;
-import juanrns.book_phone.repositories.UserRepository;
+import juanrns.book_phone.domain.user.UserDTO;
+import juanrns.book_phone.domain.user.User;
+import juanrns.book_phone.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 

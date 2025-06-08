@@ -1,7 +1,11 @@
-package juanrns.book_phone.entity;
+package juanrns.book_phone.domain.user;
 
 import jakarta.persistence.*;
+import juanrns.book_phone.domain.contact.Contact;
+import juanrns.book_phone.domain.user.enums.UserType;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,16 +16,13 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User implements UserDetails {
-
-    public User() {}
-
-    public User(String username, String password, Collection<? extends GrantedAuthority> authorities) { }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
 
     private String name;
 

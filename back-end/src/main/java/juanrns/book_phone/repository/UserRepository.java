@@ -1,9 +1,7 @@
-package juanrns.book_phone.repositories;
+package juanrns.book_phone.repository;
 
-import jakarta.validation.constraints.NotNull;
-import juanrns.book_phone.entity.User;
+import juanrns.book_phone.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;

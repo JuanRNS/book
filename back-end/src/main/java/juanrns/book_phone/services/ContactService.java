@@ -1,14 +1,13 @@
 package juanrns.book_phone.services;
 
-import juanrns.book_phone.DTO.ContactDTO;
-import juanrns.book_phone.DTO.ContactResponseDTO;
-import juanrns.book_phone.entity.Contact;
-import juanrns.book_phone.entity.User;
-import juanrns.book_phone.repositories.ContactsRepository;
+import juanrns.book_phone.domain.contact.ContactDTO;
+import juanrns.book_phone.domain.contact.ContactResponseDTO;
+import juanrns.book_phone.domain.contact.Contact;
+import juanrns.book_phone.domain.user.User;
+import juanrns.book_phone.repository.ContactsRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ContactService {
@@ -32,7 +31,6 @@ public class ContactService {
         return contactsRepository.save(newContact);
     }
 
-
     public List<ContactResponseDTO> getAllContacts(Long userId) {
         return contactsRepository.findContactsByUserId(userId).stream().map(
                 contacts -> new ContactResponseDTO(
@@ -46,5 +44,25 @@ public class ContactService {
                         contacts.getModified()
                 )
         ).toList();
+    }
+
+    public List<ContactResponseDTO> findByNameStartingWith(User user,String name) {
+        List<Contact> contactsList= contactsRepository.findByUserAndNameStartingWithIgnoreCase(user, name);
+        return contactsList.stream().map(
+                contacts -> new ContactResponseDTO(
+                        contacts.getId(),
+                        contacts.getName(),
+                        contacts.getPhone(),
+                        contacts.getEmail(),
+                        contacts.getAddress(),
+                        contacts.getFavorite(),
+                        contacts.getCreated(),
+                        contacts.getModified()
+                )
+        ).toList();
+    }
+
+    public void deleteContact(Long contactId){
+        contactsRepository.deleteById(contactId);
     }
 }

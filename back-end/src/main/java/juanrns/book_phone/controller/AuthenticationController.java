@@ -1,10 +1,10 @@
 package juanrns.book_phone.controller;
 
 import jakarta.validation.Valid;
-import juanrns.book_phone.DTO.UserDTO;
-import juanrns.book_phone.DTO.UserLogin;
-import juanrns.book_phone.DTO.UserResponseDTO;
-import juanrns.book_phone.entity.User;
+import juanrns.book_phone.domain.user.UserDTO;
+import juanrns.book_phone.domain.user.UserLogin;
+import juanrns.book_phone.domain.user.UserResponseDTO;
+import juanrns.book_phone.domain.user.User;
 import juanrns.book_phone.infra.security.TokenService;
 import juanrns.book_phone.services.UserService;
 import org.springframework.http.ResponseEntity;

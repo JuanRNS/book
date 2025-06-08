@@ -1,6 +1,6 @@
 package juanrns.book_phone.services;
 
-import juanrns.book_phone.repositories.UserRepository;
+import juanrns.book_phone.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

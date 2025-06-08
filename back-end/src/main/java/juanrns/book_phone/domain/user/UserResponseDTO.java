@@ -1,4 +1,4 @@
-package juanrns.book_phone.DTO;
+package juanrns.book_phone.domain.user;
 
 public record UserResponseDTO(
         Long id,

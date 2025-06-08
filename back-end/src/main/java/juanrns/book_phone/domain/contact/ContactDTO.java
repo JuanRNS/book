@@ -1,4 +1,4 @@
-package juanrns.book_phone.DTO;
+package juanrns.book_phone.domain.contact;
 
 import jakarta.validation.constraints.NotNull;
 

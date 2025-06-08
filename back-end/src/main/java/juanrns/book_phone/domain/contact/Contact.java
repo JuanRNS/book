@@ -1,7 +1,8 @@
-package juanrns.book_phone.entity;
+package juanrns.book_phone.domain.contact;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import juanrns.book_phone.domain.user.User;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -35,6 +36,7 @@ public class Contact {
     private Boolean favorite;
     private LocalDateTime created;
     private LocalDateTime modified;
+    private String description;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")

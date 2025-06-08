@@ -57,8 +57,4 @@ public class AuthenticationController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<List<User>> getCurrentUser() {
-        return ResponseEntity.ok(userService.getAllUsers());
-    }
 }

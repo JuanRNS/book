@@ -12,7 +12,6 @@ import java.util.List;
 @Repository
 public interface ContactsRepository extends JpaRepository<Contact,String> {
     List<Contact>findContactsByUserId(Long user_id);
-    Long user(User user);
     void deleteById(Long id);
 
     List<Contact> findByUserAndNameStartingWithIgnoreCase(User user,String prefix);

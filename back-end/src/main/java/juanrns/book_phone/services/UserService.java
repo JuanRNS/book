@@ -2,6 +2,7 @@ package juanrns.book_phone.services;
 
 import juanrns.book_phone.domain.user.UserDTO;
 import juanrns.book_phone.domain.user.User;
+import juanrns.book_phone.domain.user.enums.UserType;
 import juanrns.book_phone.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -34,5 +35,10 @@ public class UserService {
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    public void deleteUser(User user,Long userId) {
+        if(!user.getUserType().equals(UserType.ADMIN)) return;
+        userRepository.deleteById(userId);
     }
 }

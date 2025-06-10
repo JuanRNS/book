@@ -10,9 +10,8 @@ import juanrns.book_phone.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RequestMapping(value = "/auth")
 @RestController
@@ -32,17 +31,17 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody @Valid UserLogin userLogin) {
-        var usernamePassword = new UsernamePasswordAuthenticationToken(userLogin.email(), userLogin.password());
+        UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(userLogin.email(), userLogin.password());
 
-        var authentication = authenticationManager.authenticate(usernamePassword);
+        Authentication authentication = authenticationManager.authenticate(usernamePassword);
 
-        var token = tokenService.generateToken((User) authentication.getPrincipal());
+        String token = tokenService.generateToken((User) authentication.getPrincipal());
 
         return ResponseEntity.ok(token);
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody @Valid UserDTO authenticationDTO) {
+    public ResponseEntity<UserResponseDTO> register(@RequestBody @Valid UserDTO authenticationDTO) {
         if(userService.emailExists(authenticationDTO.email())) {
             return ResponseEntity.badRequest().body(null);
         }

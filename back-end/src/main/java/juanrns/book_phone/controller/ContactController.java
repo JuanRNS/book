@@ -50,10 +50,11 @@ public class ContactController {
         return ResponseEntity.ok(contactService.getAllContacts(user.getId()));
     }
 
-    @GetMapping("/delete/{contactId}")
-    public ResponseEntity<Void> deleteContact(@PathVariable Long contactId) {
-        contactService.deleteContact(contactId);
-        return ResponseEntity.ok().build();
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteContact(@PathVariable String id) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        contactService.deleteContact(id, user);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/search/contacts/filter")

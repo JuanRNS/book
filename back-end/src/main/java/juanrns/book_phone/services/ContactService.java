@@ -8,6 +8,9 @@ import juanrns.book_phone.repository.ContactsRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+
+import static java.lang.Long.parseLong;
 
 @Service
 public class ContactService {
@@ -62,7 +65,14 @@ public class ContactService {
         ).toList();
     }
 
-    public void deleteContact(Long contactId){
-        contactsRepository.deleteById(contactId);
+    public void deleteContact(String contactId, User user) {
+        Contact contact = contactsRepository.findById(contactId).orElseThrow();
+
+        if (Objects.equals(contact.getUser().getId(), user.getId())) {
+            contactsRepository.deleteById(contactId);
+        }else {
+            throw new RuntimeException("Contact not deleted, you don't have permission");
+        }
+
     }
 }

@@ -4,34 +4,31 @@ import juanrns.book_phone.domain.contact.ContactDTO;
 import juanrns.book_phone.domain.contact.ContactResponseDTO;
 import juanrns.book_phone.domain.contact.Contact;
 import juanrns.book_phone.domain.user.User;
+import juanrns.book_phone.mappers.ContactMapper;
 import juanrns.book_phone.repository.ContactsRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
 
-import static java.lang.Long.parseLong;
 
 @Service
 public class ContactService {
 
     private final ContactsRepository contactsRepository;
+    private final ContactMapper contactMapper;
 
-    public ContactService(ContactsRepository contactsRepository) {
+    public ContactService(ContactsRepository contactsRepository, ContactMapper contactMapper) {
         this.contactsRepository = contactsRepository;
+        this.contactMapper = contactMapper;
     }
 
-    public Contact createContact(ContactDTO contact, User user) {
-        Contact newContact = new Contact(
-                contact.name(),
-                contact.phone(),
-                contact.email(),
-                contact.address(),
-                contact.favorite(),
-                user
-        );
+    public ContactResponseDTO createContact(ContactDTO contactDTO, User user) {
+        Contact newContact = contactMapper.toContact(contactDTO);
+        newContact.setUser(user);
+        Contact contactSave = contactsRepository.save(newContact);
+        return contactMapper.toContactResponseDTO(contactSave);
 
-        return contactsRepository.save(newContact);
     }
 
     public List<ContactResponseDTO> getAllContacts(Long userId) {

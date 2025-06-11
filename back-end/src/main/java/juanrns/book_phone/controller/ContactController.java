@@ -28,20 +28,9 @@ public class ContactController {
             @RequestBody @Valid ContactDTO contactDTO) {
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Contact contact = contactService.createContact(contactDTO, user);
+        ContactResponseDTO contact = contactService.createContact(contactDTO, user);
 
-        ContactResponseDTO response = new ContactResponseDTO(
-                contact.getId(),
-                contact.getName(),
-                contact.getPhone(),
-                contact.getEmail(),
-                contact.getAddress(),
-                contact.getFavorite(),
-                contact.getCreated(),
-                contact.getModified()
-        );
-
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(contact);
     }
 
     @GetMapping("/search")

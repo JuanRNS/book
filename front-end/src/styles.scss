@@ -1,8 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; width: 100%; }
+html, body { 
+    height: 100%; 
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+ }
 body { 
-    margin: 0; 
     font-family: Roboto, "Helvetica Neue", sans-serif; 
     background-color: #111;
     background-image: url('../public/Vector3.png'), url('../public/Vector2.png'),url('../public/Vector1.png');
@@ -13,3 +17,12 @@ body {
     filter: brightness(100%);
  }
 
+
+.main-content {
+    width: 100%;
+    height: 0% !important;
+}
+
+.mat-drawer{
+    border-radius: 0 !important;
+}

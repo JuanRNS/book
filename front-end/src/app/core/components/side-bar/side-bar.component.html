@@ -1,0 +1,32 @@
+<mat-drawer-container class="sidenav-container">
+
+  <mat-drawer #drawer class="sidenav" mode="over" opened="false" [autofocus]="false">
+    <mat-toolbar class="toolbar-header">
+      <span>Menu</span>
+      <button mat-icon-button (click)="drawer.close()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <mat-nav-list>
+      <button mat-icon-button class="buttons-list">
+        <mat-icon fontIcon="person"></mat-icon>
+      </button>
+      <button mat-icon-button class="buttons-list">
+        <mat-icon fontIcon="settings"></mat-icon>
+      </button>
+      <button mat-icon-button class="buttons-list">
+        <mat-icon fontIcon="logout"></mat-icon>
+      </button>
+    </mat-nav-list>
+  </mat-drawer>
+
+  <mat-drawer-content class="content" [autofocus]="false">
+    <mat-toolbar>
+      <button mat-icon-button (click)="drawer.toggle()" class="menu-button">
+        <mat-icon fontIcon="menu"></mat-icon>
+      </button>
+    </mat-toolbar>
+  </mat-drawer-content>
+
+</mat-drawer-container>

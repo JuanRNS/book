@@ -30,7 +30,7 @@ export class SiginComponent {
   }
 
   public signinClick(){
-    this._router.navigate(['']);
+    this._router.navigate(['/register']);
   }
 
   public onSubmitSignIn(){

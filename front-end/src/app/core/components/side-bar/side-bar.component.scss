@@ -1,0 +1,63 @@
+.sidenav-container {
+    height: 100%;
+    width: 250px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-color: #111;
+    background-position: top left, center center, bottom right;
+    background-size: 600px, 800px, 600px;
+    background-blend-mode: multiply;
+    filter: brightness(100%);
+}
+
+
+.sidenav {
+    height: 100%;
+    width: 250px;
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    background-color: #111;
+    background-position: top left, center center, bottom right;
+    background-size: 600px, 800px, 600px;
+    background-blend-mode: multiply;
+    filter: brightness(100%);
+
+    mat-nav-list{
+    height: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 16px !important;
+    max-height: 800px;
+}
+    
+}
+
+.toolbar-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mat-toolbar {
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    background-color: #111;
+    background-position: top left, center center, bottom right;
+    background-size: 600px, 800px, 600px;
+    background-blend-mode: multiply;
+    filter: brightness(100%);
+    color: #fff;
+
+}
+
+.menu-button {
+  margin-right: 8px;
+}
+
+.buttons-list{
+    color:#fff !important;
+    background-color: #303030 !important;
+}
+
+.mat-icon{
+    color:#fff !important;
+}

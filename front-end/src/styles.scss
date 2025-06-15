@@ -17,12 +17,10 @@ body {
     filter: brightness(100%);
  }
 
-
-.main-content {
-    width: 100%;
-    height: 0% !important;
-}
-
 .mat-drawer{
     border-radius: 0 !important;
+}
+
+.mat-mdc-form-field{
+    flex-direction: row !important;
 }

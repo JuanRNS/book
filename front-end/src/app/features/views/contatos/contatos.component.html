@@ -1,1 +1,61 @@
-<p>contatos works!</p>
+<div class="container">
+    <div class="header">
+        <h3>
+            Lista de contatos
+        </h3>
+        <div class="actions">
+            <mat-form-field>
+                <mat-label>Pesquisar</mat-label>
+                <input type="text" matInput>
+                <mat-icon fontIcon="search" matPrefix></mat-icon>
+            </mat-form-field>
+
+            <button mat-button class="add-button">
+                <mat-icon fontIcon="add"></mat-icon>
+                Adicionar Contato
+            </button>
+
+            <button mat-icon-button>
+                <mat-icon fontIcon="lock"></mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="sidebar-filter">
+            @for (item of alphabet; track $index) {
+                <button mat-icon-button>{{ item }}</button>
+            }
+        </div>
+        <div class="table">
+            <div class="title-letter">
+                <span>Letra</span>
+                <div class="divider"></div>
+            </div>
+            <div class="table-header">
+                <div class="row-header">Nome</div>
+                <div class="row-header">Telefone</div>
+                <div class="row-header">Email</div>
+            </div>
+
+            <div class="table-row">
+                <div class="rows">Exemplo</div>
+                <div class="rows">Exemplo</div>
+                <div class="rows">Exemplo</div>
+                <div class="buttons">
+                    <button mat-button class="btn-edit">
+                        <mat-icon fontIcon="edit"></mat-icon>
+                        Editar
+                    </button>
+                    <button mat-icon-button>
+                        <mat-icon fontIcon="lock_open"></mat-icon>
+                    </button>
+                    <button mat-icon-button>
+                        <mat-icon fontIcon="delete"></mat-icon>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

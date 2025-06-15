@@ -1,10 +1,7 @@
 package juanrns.book_phone.controller;
 
 import jakarta.validation.Valid;
-import juanrns.book_phone.domain.user.UserDTO;
-import juanrns.book_phone.domain.user.UserLogin;
-import juanrns.book_phone.domain.user.UserResponseDTO;
-import juanrns.book_phone.domain.user.User;
+import juanrns.book_phone.domain.user.*;
 import juanrns.book_phone.infra.security.TokenService;
 import juanrns.book_phone.services.UserService;
 import org.springframework.http.ResponseEntity;
@@ -30,14 +27,14 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody @Valid UserLogin userLogin) {
+    public ResponseEntity<TokenResponseDTO> login(@RequestBody @Valid UserLogin userLogin) {
         UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(userLogin.email(), userLogin.password());
 
         Authentication authentication = authenticationManager.authenticate(usernamePassword);
 
         String token = tokenService.generateToken((User) authentication.getPrincipal());
 
-        return ResponseEntity.ok(token);
+        return ResponseEntity.ok(new TokenResponseDTO(token));
     }
 
     @PostMapping("/register")

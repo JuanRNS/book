@@ -24,6 +24,7 @@ public class Contact {
     private LocalDateTime created;
     private LocalDateTime modified;
     private String description;
+    private String image;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -118,6 +119,13 @@ public class Contact {
 
     public void setUser(User user) {
         this.user = user;
+    }
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
 

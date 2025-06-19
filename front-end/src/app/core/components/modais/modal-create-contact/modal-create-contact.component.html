@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>
+    Adicionar Contato
+</h2>
+<mat-dialog-content>
+    <div class="content">
+         <div class="avatar">
+             <mat-icon fontIcon="person"></mat-icon>
+         </div>
+        <button mat-button>
+            <mat-icon fontIcon="add"></mat-icon>
+            Adicionar foto
+        </button>
+    </div>
+
+    <div class="inputs" [formGroup]="form" >
+        <app-input label="Nome" type="text" formControlName="name" [required]="true"></app-input>
+        <app-input label="Telefone" type="text" formControlName="phone" [required]="true"></app-input>
+        <app-input label="Email" type="email" formControlName="email" [required]="true"></app-input>
+        <app-input label="Endereço" type="text" formControlName="address"></app-input>
+        <app-input label="Observação" type="text" formControlName="description"></app-input>
+        <mat-checkbox formControlName="favorite">Favorito</mat-checkbox>
+    </div>
+
+    <div class="buttons">
+        <button mat-button class="cancel-button">Cancelar</button>
+        <button mat-button class="save-button" (click)="onSubmit()">Salvar</button>
+    </div>
+
+</mat-dialog-content>

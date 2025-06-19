@@ -3,9 +3,10 @@ import { FormComponent } from '../form/form.component';
 import { MatInputModule } from '@angular/material/input';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../features/services/user.service';
 import { IUserRequestRegister } from '../../interfaces/user.interface';
+import { InputComponent } from "../input/input.component";
 
 @Component({
   selector: 'app-sign-up',
@@ -16,7 +17,7 @@ import { IUserRequestRegister } from '../../interfaces/user.interface';
         useValue: { appearance: 'outline' } 
       }
     ],
-  imports: [FormComponent, MatInputModule, ReactiveFormsModule],
+  imports: [FormComponent, MatInputModule, InputComponent],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss'
 })

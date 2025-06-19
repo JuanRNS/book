@@ -1,20 +1,17 @@
-<div [formGroup]="form">
+<div class="tema-dark">
     <app-form
     formTitle="Acessar conta"
     buttonForm="Entrar"
     signinOrSignup="Não tem uma conta? Criar conta"
     (signinOrSignupButton)="signinClick()"
     (formSubmit)="onSubmitSignIn()"
+    [form]="form"
     >
-        <mat-form-field class="block-input">
             <mat-label>Email</mat-label>
-            <input matInput type="email" name="email" formControlName="email" required>
-        </mat-form-field>
+            <app-input label="Email" type="email" controlName="email" [form]="form" color="dark"></app-input>
     
-        <mat-form-field class="block-input">
             <mat-label>Senha</mat-label>
-            <input matInput type="password" name="password" formControlName="password" required>
-        </mat-form-field>
+            <app-input label="Senha" type="password" controlName="password" [form]="form" color="dark"></app-input>
     </app-form>
 
 </div>

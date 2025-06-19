@@ -1,11 +1,14 @@
-<mat-form-field class="block-input">
+<mat-form-field class="block-input" [formGroup]="form()">
             <mat-label>{{label()}}</mat-label>
             <input 
             matInput 
             [type]="type()" 
             [placeholder]="placeHolder()"
-            [value]="value"
-            (input)="onInput($event)"
-            (blur)="onTouched()"
-            [required]="required()">
+            [formControlName]="controlName()"
+            [required]="requiredControl()"
+            class="{{color()}}"
+            >
+            @if(form().get(controlName())?.hasError('required')){
+                <mat-error>Este campo é obrigatório</mat-error>
+            }
 </mat-form-field>

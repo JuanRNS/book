@@ -1,5 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
@@ -17,36 +18,21 @@ import { MatInputModule } from '@angular/material/input';
           multi: true
         }
   ],
-  imports: [MatInputModule, ReactiveFormsModule],
+  imports: [MatInputModule, ReactiveFormsModule, CommonModule],
   templateUrl: './input.component.html',
   styleUrl: './input.component.scss'
 })
-export class InputComponent implements ControlValueAccessor{
+export class InputComponent {
 
-  public label = input<string>('');
+  public label = input.required<string>();
   public type = input<string>('text');
   public placeHolder = input<string>('');
-  public required = input<boolean>(false);  
+  public form = input.required<FormGroup>();
+  public controlName = input<string>('');
+  public color = input<string>('light');
 
-  public value: any;
-  public onChange: any = (value: any) => {};
-  public onTouched: any = () => {};
-
-   writeValue(value: any): void {
-    this.value = value;
-  }
-
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-
-  onInput(event: any) {
-    this.value = event.target.value;
-    this.onChange(this.value);
+  public requiredControl():boolean {
+    return this.form().get(this.controlName())?.hasError('required') ?? false;
   }
 
 }

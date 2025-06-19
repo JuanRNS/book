@@ -39,22 +39,23 @@
             </div>
 
             <div class="table-row">
-                <div class="rows">Exemplo</div>
-                <div class="rows">Exemplo</div>
-                <div class="rows">Exemplo</div>
-                <div class="buttons">
-                    <button mat-button class="btn-edit">
-                        <mat-icon fontIcon="edit"></mat-icon>
-                        Editar
-                    </button>
-                    <button mat-icon-button>
-                        <mat-icon fontIcon="lock_open"></mat-icon>
-                    </button>
-                    <button mat-icon-button>
-                        <mat-icon fontIcon="delete"></mat-icon>
-                    </button>
-
-                </div>
+                @for (item of listContacts; track $index) {
+                    <div class="rows">{{item.name}}</div>
+                    <div class="rows">{{item.phone}}</div>
+                    <div class="rows">{{item.email}}</div>
+                    <div class="buttons">
+                        <button mat-button class="btn-edit" (click)="editContact(item)">
+                            <mat-icon fontIcon="edit"></mat-icon>
+                            Editar
+                        </button>
+                        <button mat-icon-button>
+                            <mat-icon fontIcon="lock_open"></mat-icon>
+                        </button>
+                        <button mat-icon-button (click)="deleteContact(item.id)">
+                            <mat-icon fontIcon="delete"></mat-icon>
+                        </button>
+                    </div>
+                }
             </div>
         </div>
     </div>

@@ -17,7 +17,17 @@ export class ApiService extends HttpServiceAbstract {
     return this.post<IResponseContact>('contact/create', contact);
   }
 
+  public searchContacts(){
+    return this.get<IResponseContact[]>('contact/search');
+  }
+
+  public updateContact(contact: IResponseContact){
+    return this.put<IResponseContact>('contact/update', contact);
+  }
   
 
+  public deleteContact(id: number){
+    return this.delete<IResponseContact>(`contact/delete/${id}`, );
+  }
 
 }

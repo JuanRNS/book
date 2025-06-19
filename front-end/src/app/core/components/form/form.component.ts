@@ -1,5 +1,5 @@
 import { Component, EventEmitter, input, Output,} from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
@@ -7,24 +7,25 @@ import { MatButtonModule } from '@angular/material/button';
   standalone: true,
   imports: [MatButtonModule, ReactiveFormsModule],
   templateUrl: './form.component.html',
-  styleUrl: './form.component.scss'
+  styleUrl: './form.component.scss',
 })
 export class FormComponent {
-public signinOrSignup = input<string>('');
-public formTitle = input<string>('');
-public buttonForm = input<string>('');
-@Output()
-public signinOrSignupButton = new EventEmitter<void>();
-@Output()
-public formSubmit = new EventEmitter<void>();
+  public signinOrSignup = input<string>('');
+  public formTitle = input<string>('');
+  public buttonForm = input<string>('');
+  public form = input.required<FormGroup>();
+  @Output()
+  public signinOrSignupButton = new EventEmitter<void>();
+  @Output()
+  public formSubmit = new EventEmitter<void>();
 
-constructor(){}
+  constructor() {}
 
-  public onSigninOrSignupClick(){
+  public onSigninOrSignupClick() {
     this.signinOrSignupButton.emit();
   }
 
-  public onSubmit(){
+  public onSubmit() {
     this.formSubmit.emit();
   }
 }

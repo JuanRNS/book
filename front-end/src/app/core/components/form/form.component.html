@@ -4,7 +4,7 @@
       <button mat-button class="signin-or-signup" (click)="onSigninOrSignupClick()">{{signinOrSignup()}}</button>
       <h3>{{formTitle()}}</h3>
     </div>
-    <form>
+    <form [formGroup]="form()">
         <ng-content></ng-content>
         <button mat-flat-button color="primary" (click)="onSubmit()">{{buttonForm()}}</button>
     </form>

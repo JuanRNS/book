@@ -3,8 +3,9 @@ import { FormComponent } from '../form/form.component';
 import { MatInputModule } from '@angular/material/input';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { UserService } from '../../../features/services/user.service';
+import { InputComponent } from "../input/input.component";
 
 @Component({
   selector: 'app-sign-in',
@@ -15,7 +16,7 @@ import { UserService } from '../../../features/services/user.service';
       useValue: { appearance: 'outline' } 
     }
   ],
-  imports: [FormComponent,MatInputModule, ReactiveFormsModule],
+  imports: [FormComponent, MatInputModule, InputComponent],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.scss'
 })

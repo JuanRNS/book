@@ -72,4 +72,19 @@ public class ContactService {
         }
 
     }
+
+    public ContactResponseDTO updateContact(String contactId, ContactDTO contactDTO, User user) {
+        Contact contact = contactsRepository.findById(contactId).orElseThrow();
+        if (Objects.equals(contact.getUser().getId(), user.getId())) {
+            contact.setName(contactDTO.name());
+            contact.setPhone(contactDTO.phone());
+            contact.setEmail(contactDTO.email());
+            contact.setAddress(contactDTO.address());
+            contact.setFavorite(contactDTO.favorite());
+            Contact contactSave = contactsRepository.save(contact);
+            return contactMapper.toContactResponseDTO(contactSave);
+        }else {
+            throw new RuntimeException("Contact not updated, you don't have permission");
+        }
+    }
 }

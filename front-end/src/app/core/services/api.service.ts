@@ -21,13 +21,16 @@ export class ApiService extends HttpServiceAbstract {
     return this.get<IResponseContact[]>('contact/search');
   }
 
-  public updateContact(contact: IResponseContact){
-    return this.put<IResponseContact>('contact/update', contact);
+  public updateContact(contact: IResponseContact, id: number){
+    return this.put<IResponseContact>(`contact/update/${id}`, contact);
   }
   
-
   public deleteContact(id: number){
     return this.delete<IResponseContact>(`contact/delete/${id}`, );
+  }
+
+  public filterContacts(letter: string) {
+    return this.get<IResponseContact[]>(`contact/search/contacts/filter?name=${letter}`);
   }
 
 }

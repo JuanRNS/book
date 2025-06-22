@@ -26,4 +26,9 @@ export class SideBarComponent {
   public goToContacts(){
     this._router.navigate(['/home/contatos']);
   }
+
+  public logout(){
+    localStorage.removeItem('token');
+    this._router.navigate(['/login']);
+  }
 }

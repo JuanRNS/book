@@ -8,11 +8,14 @@ import { ModalCreateContactComponent } from '../../../core/components/modais/mod
 import { IResponseContact } from '../../../core/interfaces/contact.interface';
 import { ApiService } from '../../../core/services/api.service';
 import { ModalEditContactComponent } from '../../../core/components/modais/modal-edit-contact/modal-edit-contact.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-contatos',
   standalone: true,
-  imports: [MatInputModule, MatIconModule, MatButtonModule],
+  imports: [MatInputModule, MatIconModule, MatButtonModule, MatPaginatorModule, ReactiveFormsModule],
   providers: [
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
@@ -26,7 +29,9 @@ import { ModalEditContactComponent } from '../../../core/components/modais/modal
   styleUrl: './contatos.component.scss',
 })
 export class ContatosComponent {
+  public listContactsOrigin: IResponseContact[] = [];
   public listContacts: IResponseContact[] = [];
+  public search = new FormControl('');
 
   private readonly _dialog = inject(MatDialog);
 
@@ -34,6 +39,12 @@ export class ContatosComponent {
 
   ngOnInit() {
     this.searchContacts();
+    this.search.valueChanges.pipe(
+      debounceTime(300),
+      distinctUntilChanged()
+    ).subscribe((value) => {
+        this.filterContacts(value);
+    });
   }
 
   public alphabet: string[] = [
@@ -77,17 +88,42 @@ export class ContatosComponent {
     this._service.searchContacts().subscribe((response) => {
       console.log(response);
       this.listContacts = response;
+      this.listContactsOrigin = response;
     });
   }
 
   public editContact(contact: IResponseContact) {
-    this._dialog.open(ModalEditContactComponent,{
+   const dialogRef =  this._dialog.open(ModalEditContactComponent,{
       width: '400px',
       height: '600px',
       autoFocus: false,
       data: contact
     })
+    dialogRef.afterClosed().subscribe((result) => {
+      if(result !== 'Nenhum campo foi alterado') {
+        this.searchContacts();
+      }
+      console.log(result);
+    });
   }
+
+  public filterContactsByLetter(letter: string) {
+    this.listContacts = this.listContactsOrigin.filter((contact) => {
+      return contact.name.toLowerCase().startsWith(letter.toLowerCase());
+    });
+  }
+
+  private filterContacts(filter: string | null) {
+    
+    if(filter !== null && filter !== '') {
+      this.listContacts = this.listContactsOrigin.filter((contact) => {
+        return contact.name.toLowerCase().includes(filter.toLowerCase());
+      });
+    }else{
+      this.listContacts = this.listContactsOrigin;
+    }
+  }
+  
   
   public deleteContact(id: number) {
     this._service.deleteContact(id).subscribe(() => {

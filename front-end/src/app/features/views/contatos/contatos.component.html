@@ -6,7 +6,7 @@
         <div class="actions">
             <mat-form-field>
                 <mat-label>Pesquisar</mat-label>
-                <input type="text" matInput>
+                <input type="text" matInput [formControl]="search" placeholder="Digite o nome do contato">
                 <mat-icon fontIcon="search" matPrefix></mat-icon>
             </mat-form-field>
 
@@ -23,8 +23,11 @@
 
     <div class="content">
         <div class="sidebar-filter">
+            <button mat-icon-button (click)="filterContactsByLetter('')">
+                <mat-icon fontIcon="filter_list"></mat-icon>
+            </button>
             @for (item of alphabet; track $index) {
-                <button mat-icon-button>{{ item }}</button>
+                <button mat-icon-button (click)="filterContactsByLetter(item)">{{ item }}</button>
             }
         </div>
         <div class="table">
@@ -57,6 +60,7 @@
                     </div>
                 }
             </div>
+            <mat-paginator></mat-paginator>
         </div>
     </div>
 </div>

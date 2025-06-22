@@ -28,7 +28,7 @@ export class InputComponent {
   public type = input<string>('text');
   public placeHolder = input<string>('');
   public form = input.required<FormGroup>();
-  public controlName = input<string>('');
+  public controlName = input.required<string>();
   public color = input<string>('light');
 
   public requiredControl():boolean {

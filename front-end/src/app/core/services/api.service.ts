@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpServiceAbstract } from '../abstract/http-service.abstract';
 import { environment } from '../../../environment/environment';
-import { IRequestContact, IResponseContact } from '../interfaces/contact.interface';
+import { IRequestContact, IResponseContact, IResponseContacts } from '../interfaces/contact.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +17,8 @@ export class ApiService extends HttpServiceAbstract {
     return this.post<IResponseContact>('contact/create', contact);
   }
 
-  public searchContacts(){
-    return this.get<IResponseContact[]>('contact/search');
+  public searchContacts(page: number, pageSize: number){
+    return this.get<IResponseContacts>(`contact/search?page=${page}&size=${pageSize}`);
   }
 
   public updateContact(contact: IResponseContact, id: number){

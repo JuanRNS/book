@@ -8,7 +8,7 @@ import { ModalCreateContactComponent } from '../../../core/components/modais/mod
 import { IResponseContact } from '../../../core/interfaces/contact.interface';
 import { ApiService } from '../../../core/services/api.service';
 import { ModalEditContactComponent } from '../../../core/components/modais/modal-edit-contact/modal-edit-contact.component';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 
@@ -32,6 +32,11 @@ export class ContatosComponent {
   public listContactsOrigin: IResponseContact[] = [];
   public listContacts: IResponseContact[] = [];
   public search = new FormControl('');
+
+  public page = 0;
+  public pageSize = 5;
+  public totalElements = 0;
+  public letterSelected: string = 'Sem Letra Selecionada';
 
   private readonly _dialog = inject(MatDialog);
 
@@ -81,15 +86,25 @@ export class ContatosComponent {
       width: '400px',
       height: '600px',
       autoFocus: false,
+    }).afterClosed().subscribe((result) => {
+      if(result) {
+        this.searchContacts();
+      }
+      console.log(result);
     });
   }
 
   public searchContacts() {
-    this._service.searchContacts().subscribe((response) => {
-      console.log(response);
-      this.listContacts = response;
-      this.listContactsOrigin = response;
+    this._service.searchContacts(this.page, this.pageSize).subscribe((response) => {
+      this.listContacts = response.content;
+      this.listContactsOrigin = response.content;
+      this.totalElements = response.totalElements;
     });
+  }
+  public changePage(event: PageEvent) {
+    this.page = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.searchContacts();
   }
 
   public editContact(contact: IResponseContact) {
@@ -108,6 +123,7 @@ export class ContatosComponent {
   }
 
   public filterContactsByLetter(letter: string) {
+    this.letterSelected = letter || 'Sem Letra Selecionada';
     this.listContacts = this.listContactsOrigin.filter((contact) => {
       return contact.name.toLowerCase().startsWith(letter.toLowerCase());
     });

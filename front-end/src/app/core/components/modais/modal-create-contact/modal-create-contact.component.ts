@@ -42,13 +42,20 @@ export class ModalCreateContactComponent {
 
   public onSubmit() {
     if (this.form.invalid) {
+      console.log('Formulário inválido', this.form);
       this.form.markAllAsTouched();
       this.form.updateValueAndValidity();
       this.form.markAsDirty();
       return;
     }
-    this._service.createContact(this.form.value);
+    this._service.createContact(this.form.value).subscribe({
+      next: (res) => {
+        this._dialog.close(true);
+      },
+      error: (err) => {
+        this._dialog.close(err.error.message);
+      },
+    });
 
-    this._dialog.close();
   }
 }

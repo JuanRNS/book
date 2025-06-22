@@ -32,7 +32,7 @@
         </div>
         <div class="table">
             <div class="title-letter">
-                <span>Letra</span>
+                <span>{{letterSelected}}</span>
                 <div class="divider"></div>
             </div>
             <div class="table-header">
@@ -60,7 +60,7 @@
                     </div>
                 }
             </div>
-            <mat-paginator></mat-paginator>
+            <mat-paginator [pageSize]="pageSize" [length]="totalElements" (page)="changePage($event)"></mat-paginator>
         </div>
     </div>
 </div>

@@ -18,3 +18,16 @@ export interface IResponseContact{
     createdAt: string;
     updatedAt: string;
 }
+
+export interface IResponseContacts{
+    content: IResponseContact[];
+    pageable: IPageable;
+    size: number;
+    totalElements: number;
+    totalPages: number;
+}
+
+interface IPageable{
+    pageNumber: number;
+    pageSize: number;
+}

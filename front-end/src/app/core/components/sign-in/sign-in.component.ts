@@ -40,7 +40,7 @@ export class SiginComponent {
       this.form.markAllAsTouched();
     }
     this._service.login(this.form.value).subscribe(res => {
-      localStorage.setItem('token', res.token);
+      this._service.setToken(res.token);
       this._router.navigate(['/home']);
     });
   }

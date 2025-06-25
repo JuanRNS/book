@@ -6,6 +6,8 @@ import juanrns.book_phone.domain.contact.Contact;
 import juanrns.book_phone.domain.user.User;
 import juanrns.book_phone.mappers.ContactMapper;
 import juanrns.book_phone.repository.ContactsRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,20 +33,20 @@ public class ContactService {
 
     }
 
-    public List<ContactResponseDTO> getAllContacts(Long userId) {
-        return contactsRepository.findContactsByUserId(userId).stream().map(
-                contacts -> new ContactResponseDTO(
-                        contacts.getId(),
-                        contacts.getName(),
-                        contacts.getPhone(),
-                        contacts.getEmail(),
-                        contacts.getAddress(),
-                        contacts.getFavorite(),
-                        contacts.getCreated(),
-                        contacts.getModified()
-                )
-        ).toList();
+    public Page<ContactResponseDTO> getAllContacts(Long userId, Pageable pageable) {
+        return contactsRepository.findContactsByUserId(userId, pageable)
+                .map(contact -> new ContactResponseDTO(
+                        contact.getId(),
+                        contact.getName(),
+                        contact.getPhone(),
+                        contact.getEmail(),
+                        contact.getAddress(),
+                        contact.getFavorite(),
+                        contact.getCreated(),
+                        contact.getModified()
+                ));
     }
+
 
     public List<ContactResponseDTO> findByNameStartingWith(User user,String name) {
         List<Contact> contactsList= contactsRepository.findByUserAndNameStartingWithIgnoreCase(user, name);

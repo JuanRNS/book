@@ -6,9 +6,13 @@ import juanrns.book_phone.domain.contact.ContactDTO;
 import juanrns.book_phone.domain.contact.ContactResponseDTO;
 import juanrns.book_phone.domain.user.User;
 import juanrns.book_phone.services.ContactService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RequestMapping(value = "/contact")
@@ -31,9 +35,9 @@ public class ContactController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<ContactResponseDTO>> getContacts() {
+    public ResponseEntity<Page<ContactResponseDTO>> getContacts(@PageableDefault(size = 10, page = 0) Pageable pageable) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return ResponseEntity.ok(contactService.getAllContacts(user.getId()));
+        return ResponseEntity.ok(contactService.getAllContacts(user.getId(), pageable));
     }
 
     @DeleteMapping("/delete/{id}")

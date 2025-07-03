@@ -19,7 +19,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User CreateUser(UserDTO user) {
+    public User createUser(UserDTO user) {
         String password = new BCryptPasswordEncoder().encode(user.password());
         User newUser = new User(user.name(),user.email(),password,user.phoneNumber());
 
@@ -27,10 +27,6 @@ public class UserService {
     }
     public boolean emailExists(String email) {
         return userRepository.findByEmail(email).isPresent();
-    }
-
-    public Optional<User> findUserByEmail(String email) {
-        return userRepository.findByEmail(email);
     }
 
     public List<User> getAllUsers() {

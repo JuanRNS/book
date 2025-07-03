@@ -42,7 +42,7 @@ public class AuthenticationController {
         if(userService.emailExists(authenticationDTO.email())) {
             return ResponseEntity.badRequest().body(null);
         }
-        User newUser = userService.CreateUser(authenticationDTO);
+        User newUser = userService.createUser(authenticationDTO);
 
         UserResponseDTO response = new UserResponseDTO(
                 newUser.getId(),

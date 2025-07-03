@@ -32,13 +32,13 @@ public class Contact {
 
     public Contact() {}
 
-    public Contact(String name,String phone, String email,String address,Boolean favorite, User user_id) {
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.favorite = favorite;
-        this.user = user_id;
+    public Contact(ContactDTO contactDTO, User user) {
+        this.name = contactDTO.name();
+        this.phone = contactDTO.phone();
+        this.email = contactDTO.email();
+        this.address = contactDTO.address();
+        this.favorite = contactDTO.favorite();
+        this.user = user;
     }
 
     public Long getId() {

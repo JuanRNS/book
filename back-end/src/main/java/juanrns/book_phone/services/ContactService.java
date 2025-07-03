@@ -65,7 +65,9 @@ public class ContactService {
     }
 
     public void deleteContact(String contactId, User user) {
-        Contact contact = contactsRepository.findById(contactId).orElseThrow();
+        Contact contact = contactsRepository.findById(contactId).orElseThrow(
+                () -> new RuntimeException("Contact not found")
+        );
 
         if (Objects.equals(contact.getUser().getId(), user.getId())) {
             contactsRepository.deleteById(contactId);
@@ -76,7 +78,9 @@ public class ContactService {
     }
 
     public ContactResponseDTO updateContact(String contactId, ContactDTO contactDTO, User user) {
-        Contact contact = contactsRepository.findById(contactId).orElseThrow();
+        Contact contact = contactsRepository.findById(contactId).orElseThrow(
+                () -> new RuntimeException("Contact not found")
+        );
         if (Objects.equals(contact.getUser().getId(), user.getId())) {
             contact.setName(contactDTO.name());
             contact.setPhone(contactDTO.phone());
